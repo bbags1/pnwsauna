@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pnwsauna.com'),
   title: {
     default: "PNW Sauna | Mobile Sauna Rentals & Custom Builds in Coeur d'Alene",
     template: "%s | PNW Sauna",
