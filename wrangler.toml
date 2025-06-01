@@ -9,9 +9,4 @@ command = "npm run build"
 
 [build.environment]
 NODE_VERSION = "18"
-NEXT_TELEMETRY_DISABLED = "1"
-
-[[build.upload]]
-type = "directory"
-directory = ".next"
-site = "pnwsauna" 
+NEXT_TELEMETRY_DISABLED = "1" 
