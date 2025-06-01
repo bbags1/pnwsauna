@@ -12,38 +12,12 @@ export default function Events() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const formData = new FormData(event.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      eventType: formData.get('event-type'),
-      date: formData.get('date'),
-      guests: formData.get('guests'),
-      message: formData.get('message'),
-    };
-
-    try {
-      const response = await fetch('/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit form');
-      }
-
+    // Temporarily disabled - backend will be implemented later
+    setTimeout(() => {
       setSubmitStatus('success');
-      event.currentTarget.reset();
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-    } finally {
       setIsSubmitting(false);
-    }
+      event.currentTarget.reset();
+    }, 1000);
   };
 
   return (

@@ -2,8 +2,8 @@ name = "pnwsauna"
 compatibility_date = "2024-02-01"
 
 [build]
-command = "npm run pages:build"
-publish = ".vercel/output/static"
+command = "npm run build"
+publish = "out"
 
 [build.environment]
 NODE_VERSION = "18"

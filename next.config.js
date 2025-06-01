@@ -1,21 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'pnwsauna.com',
-      },
-    ],
   },
-  // Disable certain features that might cause recursion
-  webpack: (config) => {
-    config.watchOptions = {
-      ignored: ['**/node_modules', '**/.next'],
-    };
-    return config;
+  experimental: {
+    esmExternals: false,
   },
 };
 
