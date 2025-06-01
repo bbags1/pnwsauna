@@ -1,9 +1,17 @@
+name = "pnwsauna"
+compatibility_date = "2024-02-01"
+
 [build]
-command = "npm run build"
-publish = ".next"
+command = "npm run pages:build"
+deploy = "npx wrangler pages deploy .vercel/output/static"
+publish = ".vercel/output/static"
 
 [build.environment]
 NODE_VERSION = "18"
+NEXT_TELEMETRY_DISABLED = "1"
+
+[site]
+bucket = ".vercel/output/static"
 
 [[build.upload]]
 type = "directory"
