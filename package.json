@@ -7,10 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
-    "pages:watch": "npx @cloudflare/next-on-pages --watch",
-    "pages:dev": "npx wrangler pages dev .vercel/output/static --compatibility-date=2024-02-01"
+    "pages:build": "npx @cloudflare/next-on-pages@1.13.0",
+    "pages:preview": "npm run pages:build && wrangler pages dev .vercel/output/static",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -22,7 +21,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.12",
+    "@cloudflare/next-on-pages": "^1.13.0",
     "@types/node": "^20.17.57",
     "@types/react": "^18",
     "@types/react-dom": "^18",
