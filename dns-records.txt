@@ -1,0 +1,24 @@
+# DNS Records for Email Routing
+
+# MX Records (Priority: 10)
+pnwsaunacda.com.    MX    10    mx1.cloudflare.net
+pnwsaunacda.com.    MX    10    mx2.cloudflare.net
+pnwsaunacda.com.    MX    10    mx3.cloudflare.net
+
+# SPF Record
+pnwsaunacda.com.    TXT    "v=spf1 include:_spf.mx.cloudflare.net ~all"
+
+# DKIM Record (Cloudflare will provide the actual value)
+cloudflare._domainkey.pnwsaunacda.com.    TXT    "v=DKIM1; ..."
+
+# DMARC Record
+_dmarc.pnwsaunacda.com.    TXT    "v=DMARC1; p=quarantine; rua=mailto:pnwsaunacda@gmail.com"
+
+# Email Routes to Set Up in Cloudflare:
+# 1. contact@pnwsaunacda.com -> pnwsaunacda@gmail.com
+# 2. events@pnwsaunacda.com -> pnwsaunacda@gmail.com
+
+# Additional DNS Records to Preserve:
+# - Preserve any existing A records for your website
+# - Preserve any existing CNAME records for subdomains
+# - Preserve any existing TXT records for domain verification 
