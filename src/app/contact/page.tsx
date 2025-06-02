@@ -13,12 +13,35 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Temporarily disabled - backend will be implemented later
-    setTimeout(() => {
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
       setSubmitStatus('success');
-      setIsSubmitting(false);
       event.currentTarget.reset();
-    }, 1000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
