@@ -18,7 +18,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     console.log('Contact form endpoint called');
     
     const formData = await context.request.json();
-    console.log('Form data received:', formData);
+    console.log('Form data received:', JSON.stringify(formData, null, 2));
     
     const { name, email, phone, message } = formData;
 
@@ -34,121 +34,26 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    console.log('Validation passed, attempting to send emails');
+    console.log('Validation passed');
+    
+    // Log the contact form submission (for now, until we fix MailChannels)
+    console.log('NEW CONTACT FORM SUBMISSION:');
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Phone:', phone || 'Not provided');
+    console.log('Message:', message);
+    console.log('Submitted at:', new Date().toISOString());
+    console.log('---END SUBMISSION---');
 
-    // Email content for admin notification
-    const adminEmailContent = `
-New Contact Form Submission from PNW Sauna Website
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
-Message:
-${message}
-
----
-Submitted at: ${new Date().toLocaleString()}
-    `.trim();
-
-    // Email content for customer confirmation
-    const customerEmailContent = `
-Dear ${name},
-
-Thank you for contacting PNW Sauna! We've received your message and will get back to you shortly.
-
-Your message:
-${message}
-
-Best regards,
-The PNW Sauna Team
-
----
-PNW Sauna | Coeur d'Alene, Idaho
-Phone: (360) 977-3487
-Email: pnwsaunacda@gmail.com
-    `.trim();
-
-    try {
-      // Send notification to admin using MailChannels
-      console.log('Sending admin email...');
-      const adminEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: 'pnwsaunacda@gmail.com', name: 'PNW Sauna' }],
-            },
-          ],
-          from: {
-            email: 'noreply@pnwsauna.com',
-            name: 'PNW Sauna Contact Form',
-          },
-          subject: 'New Contact Form Submission',
-          content: [
-            {
-              type: 'text/plain',
-              value: adminEmailContent,
-            },
-          ],
-        }),
-      });
-
-      console.log('Admin email response status:', adminEmailResponse.status);
-      const adminResponseText = await adminEmailResponse.text();
-      console.log('Admin email response:', adminResponseText);
-
-      if (!adminEmailResponse.ok) {
-        console.error('Failed to send admin email:', adminResponseText);
-        // For now, let's not fail the entire request
-        // throw new Error('Failed to send admin notification');
-      }
-
-      // Send confirmation to customer
-      console.log('Sending customer email...');
-      const customerEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: email, name: name }],
-            },
-          ],
-          from: {
-            email: 'noreply@pnwsauna.com',
-            name: 'PNW Sauna',
-          },
-          subject: 'Thank you for contacting PNW Sauna',
-          content: [
-            {
-              type: 'text/plain',
-              value: customerEmailContent,
-            },
-          ],
-        }),
-      });
-
-      console.log('Customer email response status:', customerEmailResponse.status);
-      const customerResponseText = await customerEmailResponse.text();
-      console.log('Customer email response:', customerResponseText);
-
-      if (!customerEmailResponse.ok) {
-        console.error('Failed to send customer email:', customerResponseText);
-        // Don't fail the request if customer email fails, just log it
-      }
-    } catch (emailError) {
-      console.error('Email sending error:', emailError);
-      // Continue processing even if emails fail
-    }
-
+    // TODO: Re-enable MailChannels after domain verification
+    // For now, just return success so the form works
+    
     console.log('Contact form processing completed successfully');
     return new Response(
-      JSON.stringify({ message: 'Contact form submitted successfully' }),
+      JSON.stringify({ 
+        message: 'Contact form submitted successfully',
+        status: 'Form data logged - email system will be enabled soon'
+      }),
       {
         status: 200,
         headers: { 

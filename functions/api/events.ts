@@ -15,11 +15,16 @@ export async function onRequestOptions() {
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
+    console.log('Events form endpoint called');
+    
     const formData = await context.request.json();
-    const { name, email, phone, eventType, date, guests, message } = formData;
+    console.log('Form data received:', JSON.stringify(formData, null, 2));
+    
+    const { name, email, phone, groupSize, preferredDate, eventType, message } = formData;
 
     // Validate required fields
-    if (!name || !email || !eventType || !date || !guests || !message) {
+    if (!name || !email || !groupSize || !preferredDate || !eventType) {
+      console.log('Validation failed - missing fields');
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { 
@@ -29,114 +34,29 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    // Email content for admin notification
-    const adminEmailContent = `
-New Event Booking Request from PNW Sauna Website
+    console.log('Validation passed');
+    
+    // Log the events form submission (for now, until we fix MailChannels)
+    console.log('NEW EVENTS FORM SUBMISSION:');
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Phone:', phone || 'Not provided');
+    console.log('Group Size:', groupSize);
+    console.log('Preferred Date:', preferredDate);
+    console.log('Event Type:', eventType);
+    console.log('Message:', message || 'No message provided');
+    console.log('Submitted at:', new Date().toISOString());
+    console.log('---END SUBMISSION---');
 
-Contact Information:
-Name: ${name}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
-
-Event Details:
-Event Type: ${eventType}
-Preferred Date: ${date}
-Number of Guests: ${guests}
-
-Additional Details:
-${message}
-
----
-Submitted at: ${new Date().toLocaleString()}
-    `.trim();
-
-    // Email content for customer confirmation
-    const customerEmailContent = `
-Dear ${name},
-
-Thank you for your event booking request with PNW Sauna! We've received your submission and will get back to you within 24-48 hours with availability and pricing information.
-
-Your Event Details:
-- Event Type: ${eventType}
-- Preferred Date: ${date}
-- Number of Guests: ${guests}
-- Additional Details: ${message}
-
-We're excited to help you create an unforgettable sauna experience for your group!
-
-Best regards,
-The PNW Sauna Team
-
----
-PNW Sauna | Coeur d'Alene, Idaho
-Phone: (360) 977-3487
-Email: pnwsaunacda@gmail.com
-    `.trim();
-
-    // Send notification to admin using MailChannels
-    const adminEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: 'pnwsaunacda@gmail.com', name: 'PNW Sauna' }],
-          },
-        ],
-        from: {
-          email: 'noreply@pnwsauna.com',
-          name: 'PNW Sauna Events',
-        },
-        subject: 'New Event Booking Request',
-        content: [
-          {
-            type: 'text/plain',
-            value: adminEmailContent,
-          },
-        ],
-      }),
-    });
-
-    // Send confirmation to customer
-    const customerEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: email, name: name }],
-          },
-        ],
-        from: {
-          email: 'noreply@pnwsauna.com',
-          name: 'PNW Sauna',
-        },
-        subject: 'Event Booking Request Received - PNW Sauna',
-        content: [
-          {
-            type: 'text/plain',
-            value: customerEmailContent,
-          },
-        ],
-      }),
-    });
-
-    if (!adminEmailResponse.ok) {
-      console.error('Failed to send admin email:', await adminEmailResponse.text());
-      throw new Error('Failed to send admin notification');
-    }
-
-    if (!customerEmailResponse.ok) {
-      console.error('Failed to send customer email:', await customerEmailResponse.text());
-      // Don't fail the request if customer email fails, just log it
-    }
-
+    // TODO: Re-enable MailChannels after domain verification
+    // For now, just return success so the form works
+    
+    console.log('Events form processing completed successfully');
     return new Response(
-      JSON.stringify({ message: 'Event request submitted successfully' }),
+      JSON.stringify({ 
+        message: 'Event inquiry submitted successfully',
+        status: 'Form data logged - email system will be enabled soon'
+      }),
       {
         status: 200,
         headers: { 
@@ -148,7 +68,10 @@ Email: pnwsaunacda@gmail.com
   } catch (error) {
     console.error('Events form error:', error);
     return new Response(
-      JSON.stringify({ error: 'Error submitting event request' }),
+      JSON.stringify({ 
+        error: 'Error submitting event inquiry',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      }),
       {
         status: 500,
         headers: { 
