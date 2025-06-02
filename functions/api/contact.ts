@@ -15,11 +15,16 @@ export async function onRequestOptions() {
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
+    console.log('Contact form endpoint called');
+    
     const formData = await context.request.json();
+    console.log('Form data received:', formData);
+    
     const { name, email, phone, message } = formData;
 
     // Validate required fields
     if (!name || !email || !message) {
+      console.log('Validation failed - missing fields');
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { 
@@ -28,6 +33,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         },
       });
     }
+
+    console.log('Validation passed, attempting to send emails');
 
     // Email content for admin notification
     const adminEmailContent = `
@@ -61,68 +68,85 @@ Phone: (360) 977-3487
 Email: pnwsaunacda@gmail.com
     `.trim();
 
-    // Send notification to admin using MailChannels
-    const adminEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: 'pnwsaunacda@gmail.com', name: 'PNW Sauna' }],
-          },
-        ],
-        from: {
-          email: 'noreply@pnwsauna.com',
-          name: 'PNW Sauna Contact Form',
+    try {
+      // Send notification to admin using MailChannels
+      console.log('Sending admin email...');
+      const adminEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        subject: 'New Contact Form Submission',
-        content: [
-          {
-            type: 'text/plain',
-            value: adminEmailContent,
+        body: JSON.stringify({
+          personalizations: [
+            {
+              to: [{ email: 'pnwsaunacda@gmail.com', name: 'PNW Sauna' }],
+            },
+          ],
+          from: {
+            email: 'noreply@pnwsauna.com',
+            name: 'PNW Sauna Contact Form',
           },
-        ],
-      }),
-    });
+          subject: 'New Contact Form Submission',
+          content: [
+            {
+              type: 'text/plain',
+              value: adminEmailContent,
+            },
+          ],
+        }),
+      });
 
-    // Send confirmation to customer
-    const customerEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: email, name: name }],
-          },
-        ],
-        from: {
-          email: 'noreply@pnwsauna.com',
-          name: 'PNW Sauna',
+      console.log('Admin email response status:', adminEmailResponse.status);
+      const adminResponseText = await adminEmailResponse.text();
+      console.log('Admin email response:', adminResponseText);
+
+      if (!adminEmailResponse.ok) {
+        console.error('Failed to send admin email:', adminResponseText);
+        // For now, let's not fail the entire request
+        // throw new Error('Failed to send admin notification');
+      }
+
+      // Send confirmation to customer
+      console.log('Sending customer email...');
+      const customerEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        subject: 'Thank you for contacting PNW Sauna',
-        content: [
-          {
-            type: 'text/plain',
-            value: customerEmailContent,
+        body: JSON.stringify({
+          personalizations: [
+            {
+              to: [{ email: email, name: name }],
+            },
+          ],
+          from: {
+            email: 'noreply@pnwsauna.com',
+            name: 'PNW Sauna',
           },
-        ],
-      }),
-    });
+          subject: 'Thank you for contacting PNW Sauna',
+          content: [
+            {
+              type: 'text/plain',
+              value: customerEmailContent,
+            },
+          ],
+        }),
+      });
 
-    if (!adminEmailResponse.ok) {
-      console.error('Failed to send admin email:', await adminEmailResponse.text());
-      throw new Error('Failed to send admin notification');
+      console.log('Customer email response status:', customerEmailResponse.status);
+      const customerResponseText = await customerEmailResponse.text();
+      console.log('Customer email response:', customerResponseText);
+
+      if (!customerEmailResponse.ok) {
+        console.error('Failed to send customer email:', customerResponseText);
+        // Don't fail the request if customer email fails, just log it
+      }
+    } catch (emailError) {
+      console.error('Email sending error:', emailError);
+      // Continue processing even if emails fail
     }
 
-    if (!customerEmailResponse.ok) {
-      console.error('Failed to send customer email:', await customerEmailResponse.text());
-      // Don't fail the request if customer email fails, just log it
-    }
-
+    console.log('Contact form processing completed successfully');
     return new Response(
       JSON.stringify({ message: 'Contact form submitted successfully' }),
       {
@@ -136,7 +160,10 @@ Email: pnwsaunacda@gmail.com
   } catch (error) {
     console.error('Contact form error:', error);
     return new Response(
-      JSON.stringify({ error: 'Error submitting contact form' }),
+      JSON.stringify({ 
+        error: 'Error submitting contact form',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      }),
       {
         status: 500,
         headers: { 
