@@ -26,7 +26,7 @@ export default function Navigation() {
             <span className="sr-only">PNW Sauna</span>
             <div className="h-16 w-auto">
               <img
-                src="/images/pnw-sauna-logo.svg"
+                src="/images/logo.svg"
                 alt="PNW Sauna"
                 className="h-16 w-auto text-gray-900"
               />
@@ -67,7 +67,7 @@ export default function Navigation() {
               <span className="sr-only">PNW Sauna</span>
               <div className="h-12 w-auto">
                 <img
-                  src="/images/pnw-sauna-logo.svg"
+                  src="/images/logo.svg"
                   alt="PNW Sauna"
                   className="h-12 w-auto text-gray-900"
                 />
