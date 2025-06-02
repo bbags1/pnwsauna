@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -23,7 +24,13 @@ export default function Navigation() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PNW Sauna</span>
-            <span className="text-2xl font-bold text-gray-900">PNW Sauna</span>
+            <div className="h-12 w-auto">
+              <img
+                src="/images/pnw-sauna-logo.svg"
+                alt="PNW Sauna"
+                className="h-12 w-auto text-gray-900"
+              />
+            </div>
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -58,7 +65,13 @@ export default function Navigation() {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">PNW Sauna</span>
-              <span className="text-2xl font-bold text-gray-900">PNW Sauna</span>
+              <div className="h-10 w-auto">
+                <img
+                  src="/images/pnw-sauna-logo.svg"
+                  alt="PNW Sauna"
+                  className="h-10 w-auto text-gray-900"
+                />
+              </div>
             </Link>
             <button
               type="button"
