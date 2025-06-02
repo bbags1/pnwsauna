@@ -36,8 +36,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     console.log('Validation passed');
     
-    // Log the events form submission (for now, until we fix MailChannels)
-    console.log('NEW EVENTS FORM SUBMISSION:');
+    // Log the events form submission for tracking
+    console.log('=== NEW EVENTS FORM SUBMISSION ===');
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Phone:', phone || 'Not provided');
@@ -46,16 +46,59 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     console.log('Event Type:', eventType);
     console.log('Message:', message || 'No message provided');
     console.log('Submitted at:', new Date().toISOString());
-    console.log('---END SUBMISSION---');
+    console.log('===================================');
 
-    // TODO: Re-enable MailChannels after domain verification
-    // For now, just return success so the form works
+    // Send email via Formspree
+    try {
+      console.log('Sending event inquiry via Formspree...');
+      
+      // Formspree endpoint for PNW Sauna contact form
+      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnnvqnaz';
+      
+      const formspreeResponse = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone || 'Not provided',
+          groupSize: groupSize,
+          preferredDate: preferredDate,
+          eventType: eventType,
+          message: message || 'No additional message',
+          _subject: `New Event Inquiry from ${name} - PNW Sauna`,
+          _replyto: email,
+          _format: 'plain',
+          // Optional: Add some metadata
+          _source: 'PNW Sauna Website - Events Form',
+          _timestamp: new Date().toISOString()
+        })
+      });
+
+      console.log('Formspree response status:', formspreeResponse.status);
+      
+      if (formspreeResponse.ok) {
+        console.log('Event inquiry sent successfully via Formspree');
+      } else {
+        const errorText = await formspreeResponse.text();
+        console.error('Formspree submission failed:', errorText);
+        throw new Error('Failed to send event inquiry notification');
+      }
+
+    } catch (emailError) {
+      console.error('Email sending error:', emailError);
+      // Still return success to user, but log for manual follow-up
+      console.log('MANUAL FOLLOW-UP REQUIRED - Email failed but form submitted');
+    }
     
     console.log('Events form processing completed successfully');
     return new Response(
       JSON.stringify({ 
         message: 'Event inquiry submitted successfully',
-        status: 'Form data logged - email system will be enabled soon'
+        status: 'Event inquiry sent - we will get back to you soon!'
       }),
       {
         status: 200,

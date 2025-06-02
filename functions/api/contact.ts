@@ -36,7 +36,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     console.log('Validation passed');
     
-    // Log the contact form submission for manual follow-up
+    // Log the contact form submission for tracking
     console.log('=== NEW CONTACT FORM SUBMISSION ===');
     console.log('Name:', name);
     console.log('Email:', email);
@@ -45,28 +45,54 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     console.log('Submitted at:', new Date().toISOString());
     console.log('===================================');
 
-    // TODO: To enable email sending with pages.dev domain, choose one of these options:
-    // 
-    // Option 1: Set up Formspree (easiest)
-    // 1. Sign up at https://formspree.io
-    // 2. Create a new form and get your endpoint URL
-    // 3. Replace this comment with the Formspree fetch call
-    //
-    // Option 2: Add custom domain to Cloudflare Pages
-    // 1. Go to Pages → Settings → Domains
-    // 2. Add pnwsauna.com as custom domain
-    // 3. Then use MailChannels with proper DNS records
-    //
-    // Option 3: Use SendGrid API
-    // 1. Sign up for SendGrid
-    // 2. Add API key as environment variable
-    // 3. Use SendGrid API instead of MailChannels
+    // Send email via Formspree
+    try {
+      console.log('Sending notification via Formspree...');
+      
+      // Formspree endpoint for PNW Sauna contact form
+      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnnvqnaz';
+      
+      const formspreeResponse = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone || 'Not provided',
+          message: message,
+          _subject: `New Contact Form Submission from ${name} - PNW Sauna`,
+          _replyto: email,
+          _format: 'plain',
+          // Optional: Add some metadata
+          _source: 'PNW Sauna Website',
+          _timestamp: new Date().toISOString()
+        })
+      });
+
+      console.log('Formspree response status:', formspreeResponse.status);
+      
+      if (formspreeResponse.ok) {
+        console.log('Email sent successfully via Formspree');
+      } else {
+        const errorText = await formspreeResponse.text();
+        console.error('Formspree submission failed:', errorText);
+        throw new Error('Failed to send email notification');
+      }
+
+    } catch (emailError) {
+      console.error('Email sending error:', emailError);
+      // Still return success to user, but log for manual follow-up
+      console.log('MANUAL FOLLOW-UP REQUIRED - Email failed but form submitted');
+    }
 
     console.log('Contact form processing completed successfully');
     return new Response(
       JSON.stringify({ 
         message: 'Contact form submitted successfully',
-        status: 'Message received - we will get back to you soon!'
+        status: 'Message sent - we will get back to you soon!'
       }),
       {
         status: 200,
