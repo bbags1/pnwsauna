@@ -24,11 +24,11 @@ export default function Navigation() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PNW Sauna</span>
-            <div className="h-12 w-auto">
+            <div className="h-16 w-auto">
               <img
-                src="/images/pnw-sauna-logo.svg"
+                src="/images/pnw-sauna-logo-simple.svg"
                 alt="PNW Sauna"
-                className="h-12 w-auto text-gray-900"
+                className="h-16 w-auto text-gray-900"
               />
             </div>
           </Link>
@@ -65,11 +65,11 @@ export default function Navigation() {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">PNW Sauna</span>
-              <div className="h-10 w-auto">
+              <div className="h-14 w-auto">
                 <img
-                  src="/images/pnw-sauna-logo.svg"
+                  src="/images/pnw-sauna-logo-simple.svg"
                   alt="PNW Sauna"
-                  className="h-10 w-auto text-gray-900"
+                  className="h-14 w-auto text-gray-900"
                 />
               </div>
             </Link>
