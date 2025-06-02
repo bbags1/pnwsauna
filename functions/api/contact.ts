@@ -34,126 +34,39 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    console.log('Validation passed, attempting to send emails');
+    console.log('Validation passed');
+    
+    // Log the contact form submission for manual follow-up
+    console.log('=== NEW CONTACT FORM SUBMISSION ===');
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Phone:', phone || 'Not provided');
+    console.log('Message:', message);
+    console.log('Submitted at:', new Date().toISOString());
+    console.log('===================================');
 
-    // Email content for admin notification
-    const adminEmailContent = `
-New Contact Form Submission from PNW Sauna Website
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
-Message:
-${message}
-
----
-Submitted at: ${new Date().toLocaleString()}
-    `.trim();
-
-    // Email content for customer confirmation
-    const customerEmailContent = `
-Dear ${name},
-
-Thank you for contacting PNW Sauna! We've received your message and will get back to you shortly.
-
-Your message:
-${message}
-
-Best regards,
-The PNW Sauna Team
-
----
-PNW Sauna | Coeur d'Alene, Idaho
-Phone: (360) 977-3487
-Email: pnwsaunacda@gmail.com
-    `.trim();
-
-    try {
-      // Send notification to admin using MailChannels with proper domain authentication
-      console.log('Sending admin email...');
-      const adminEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: 'pnwsaunacda@gmail.com', name: 'PNW Sauna' }],
-            },
-          ],
-          from: {
-            email: 'noreply@pnwsauna.com',
-            name: 'PNW Sauna Contact Form',
-          },
-          reply_to: {
-            email: email,
-            name: name,
-          },
-          subject: 'New Contact Form Submission',
-          content: [
-            {
-              type: 'text/plain',
-              value: adminEmailContent,
-            },
-          ],
-        }),
-      });
-
-      console.log('Admin email response status:', adminEmailResponse.status);
-      const adminResponseText = await adminEmailResponse.text();
-      console.log('Admin email response:', adminResponseText);
-
-      if (!adminEmailResponse.ok) {
-        console.error('Failed to send admin email:', adminResponseText);
-        // Continue even if admin email fails
-      }
-
-      // Send confirmation to customer
-      console.log('Sending customer email...');
-      const customerEmailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: email, name: name }],
-            },
-          ],
-          from: {
-            email: 'noreply@pnwsauna.com',
-            name: 'PNW Sauna',
-          },
-          subject: 'Thank you for contacting PNW Sauna',
-          content: [
-            {
-              type: 'text/plain',
-              value: customerEmailContent,
-            },
-          ],
-        }),
-      });
-
-      console.log('Customer email response status:', customerEmailResponse.status);
-      const customerResponseText = await customerEmailResponse.text();
-      console.log('Customer email response:', customerResponseText);
-
-      if (!customerEmailResponse.ok) {
-        console.error('Failed to send customer email:', customerResponseText);
-        // Don't fail the request if customer email fails, just log it
-      }
-    } catch (emailError) {
-      console.error('Email sending error:', emailError);
-      // Continue processing even if emails fail
-    }
+    // TODO: To enable email sending with pages.dev domain, choose one of these options:
+    // 
+    // Option 1: Set up Formspree (easiest)
+    // 1. Sign up at https://formspree.io
+    // 2. Create a new form and get your endpoint URL
+    // 3. Replace this comment with the Formspree fetch call
+    //
+    // Option 2: Add custom domain to Cloudflare Pages
+    // 1. Go to Pages → Settings → Domains
+    // 2. Add pnwsauna.com as custom domain
+    // 3. Then use MailChannels with proper DNS records
+    //
+    // Option 3: Use SendGrid API
+    // 1. Sign up for SendGrid
+    // 2. Add API key as environment variable
+    // 3. Use SendGrid API instead of MailChannels
 
     console.log('Contact form processing completed successfully');
     return new Response(
       JSON.stringify({ 
         message: 'Contact form submitted successfully',
-        status: 'Form submitted and emails sent'
+        status: 'Message received - we will get back to you soon!'
       }),
       {
         status: 200,
