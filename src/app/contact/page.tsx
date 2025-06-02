@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link'
 import { PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +36,9 @@ export default function Contact() {
       }
 
       setSubmitStatus('success');
-      event.currentTarget.reset();
+      if (formRef.current) {
+        formRef.current.reset();
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
@@ -94,7 +97,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+        <form onSubmit={handleSubmit} className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48" ref={formRef}>
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             {submitStatus === 'success' && (
               <div className="mb-6 rounded-md bg-green-50 p-4">
