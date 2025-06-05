@@ -23,7 +23,7 @@ const values = [
   },
   {
     name: 'Quality',
-    description: 'From our mobile units to custom builds, we use only the highest quality materials and craftsmanship.',
+    description: 'From our waterfront facility to custom builds, we use only the highest quality materials and craftsmanship.',
   },
 ]
 
@@ -51,9 +51,10 @@ export default function About() {
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Based in Coeur d'Alene, Idaho, we're dedicated to sharing the transformative power of 
-              traditional sauna practices. Whether it's through our mobile sauna rentals, custom builds, 
-              or community events, our mission is to foster connections and well-being, one sauna 
-              session at a time.
+              traditional sauna practices at our beautiful Atlas Waterfront Park location. Whether 
+              you're joining us for individual sessions, becoming a community member, or commissioning 
+              a custom build, our mission is to foster connections and well-being in one of the most 
+              scenic settings in the Pacific Northwest.
             </p>
           </div>
           <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
@@ -140,7 +141,7 @@ export default function About() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+              href="/book"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Book a Session

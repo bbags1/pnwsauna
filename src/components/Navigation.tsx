@@ -12,6 +12,7 @@ const navigation = [
   { name: 'Gallery', href: '/gallery' },
   { name: 'About', href: '/about' },
   { name: 'Events', href: '/events' },
+  { name: 'Book', href: '/book' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -24,11 +25,11 @@ export default function Navigation() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PNW Sauna</span>
-            <div className="h-16 w-auto">
+            <div className="h-48 w-auto">
               <img
                 src="/images/logo.svg"
                 alt="PNW Sauna"
-                className="h-16 w-auto text-gray-900"
+                className="h-48 w-auto text-gray-900"
               />
             </div>
           </Link>
@@ -52,7 +53,7 @@ export default function Navigation() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+            href="/book"
             className="text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Book Now
@@ -65,11 +66,11 @@ export default function Navigation() {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">PNW Sauna</span>
-              <div className="h-12 w-auto">
+              <div className="h-16 w-auto">
                 <img
                   src="/images/logo.svg"
                   alt="PNW Sauna"
-                  className="h-12 w-auto text-gray-900"
+                  className="h-16 w-auto text-gray-900"
                 />
               </div>
             </Link>
@@ -97,7 +98,7 @@ export default function Navigation() {
               </div>
               <div className="py-6">
                 <Link
-                  href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                  href="/book"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white bg-blue-600 text-center hover:bg-blue-700"
                 >
                   Book Now

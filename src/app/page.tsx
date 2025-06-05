@@ -7,25 +7,25 @@ import VideoPlayer from '@/components/VideoPlayer'
 
 const services = [
   {
-    name: 'Mobile Sauna Rentals',
-    description: 'Experience authentic Finnish sauna at your location. Perfect for events, parties, or personal wellness retreats.',
-    href: '/services#rentals',
+    name: 'Sauna Sessions',
+    description: 'Experience authentic Finnish sauna sessions at our beautiful Atlas Waterfront Park location in Coeur d\'Alene.',
+    href: '/services#sessions',
     imageSrc: '/images/IMG_2089.jpg',
+  },
+  {
+    name: 'Membership Options',
+    description: 'Join our sauna community with flexible membership plans for regular access to our facilities.',
+    href: '/services#memberships', 
+    imageSrc: '/images/IMG_2082.jpg',
   },
   {
     name: 'Custom Sauna Building',
     description: 'From design to construction, we create custom saunas tailored to your space and preferences.',
     href: '/contact',
-    imageSrc: '/images/IMG_2082.jpg',
-  },
-  {
-    name: 'Sauna Consultation',
-    description: 'Expert guidance for your sauna project, ensuring authentic design and optimal functionality.',
-    href: '/contact',
     imageSrc: '/images/IMG_2087.jpg',
   },
   {
-    name: 'Public Events',
+    name: 'Community Events',
     description: 'Join our community events and experience the social and health benefits of traditional sauna culture.',
     href: '/events',
     imageSrc: '/images/IMG_2083.jpg',
@@ -43,16 +43,16 @@ export default function Home() {
             <div className="mx-auto max-w-2xl">
               <div className="max-w-lg">
                 <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Experience Authentic Finnish Sauna in Idaho
+                  Experience Authentic Finnish Sauna at Atlas Waterfront Park
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  PNW Sauna brings the authentic Finnish sauna experience to Coeur d'Alene and surrounding areas. 
-                  Whether you're looking to rent a mobile sauna, build your own, or join our community events, 
-                  we're here to share the transformative power of traditional sauna culture.
+                  PNW Sauna offers authentic Finnish sauna sessions and community memberships at our beautiful 
+                  Atlas Waterfront Park location in Coeur d'Alene, Idaho. Join us for transformative sauna 
+                  experiences that promote wellness, relaxation, and connection with nature and community.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <Link
-                    href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                    href="/book"
                     className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                   >
                     Book Now
@@ -75,7 +75,7 @@ export default function Home() {
             Everything you need for your sauna experience
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            From mobile rentals to custom builds, we provide comprehensive sauna services in the Pacific Northwest.
+            Experience authentic Finnish sauna sessions, join our community memberships, and connect with like-minded wellness enthusiasts at Atlas Waterfront Park.
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -141,7 +141,7 @@ export default function Home() {
           </h2>
           <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
             <Link
-              href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+              href="/book"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Book Now

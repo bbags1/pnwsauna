@@ -2,16 +2,29 @@ import Link from 'next/link'
 
 const services = [
   {
-    id: 'rentals',
-    name: 'Mobile Sauna Rentals',
-    description: 'Bring the authentic Finnish sauna experience to your location.',
+    id: 'sessions',
+    name: 'Sauna Sessions',
+    description: 'Experience authentic Finnish sauna sessions at our beautiful Atlas Waterfront Park location.',
     features: [
-      'Authentic wood-fired or electric sauna options',
-      'Professional delivery and setup',
-      'Available for events, parties, or personal wellness retreats',
-      'Flexible rental periods',
-      'Complete instructions and safety guidelines provided',
-      'Optional add-ons like traditional vihta/vasta (birch branches)',
+      'Traditional wood-fired sauna experiences',
+      'Stunning waterfront location in Coeur d\'Alene',
+      'Professional guidance and sauna education',
+      'Flexible session times to fit your schedule',
+      'Group and private session options available',
+      'Complete wellness experience with natural surroundings',
+    ],
+  },
+  {
+    id: 'memberships',
+    name: 'Community Memberships',
+    description: 'Join our sauna community with membership options designed for regular wellness practice.',
+    features: [
+      'Unlimited access to sauna sessions',
+      'Priority booking for popular time slots',
+      'Exclusive member events and workshops',
+      'Community connection with fellow sauna enthusiasts',
+      'Discounted rates for extended sessions',
+      'Access to traditional sauna accessories and amenities',
     ],
   },
   {
@@ -24,20 +37,6 @@ const services = [
       'Indoor and outdoor installations',
       'High-quality materials and craftsmanship',
       'Expert installation',
-      'Warranty and maintenance support',
-    ],
-  },
-  {
-    id: 'consultation',
-    name: 'Sauna Project Consultation',
-    description: 'Get expert guidance for your sauna project from start to finish.',
-    features: [
-      'Site evaluation and recommendations',
-      'Design and layout planning',
-      'Material selection guidance',
-      'Technical specifications',
-      'Ventilation and safety planning',
-      'Budget optimization',
     ],
   },
 ]
@@ -49,10 +48,10 @@ export default function Services() {
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-600">Our Services</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Comprehensive Sauna Solutions
+            Sauna Sessions & Community Memberships
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            From mobile rentals to custom builds, we provide everything you need to experience authentic Finnish sauna culture.
+            Experience authentic Finnish sauna culture at our Atlas Waterfront Park location in Coeur d'Alene, Idaho.
           </p>
         </div>
 
@@ -63,9 +62,9 @@ export default function Services() {
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">{service.name}</h2>
                 <p className="mt-6 text-base leading-7 text-gray-600">{service.description}</p>
                 <div className="mt-10">
-                  {service.id === 'rentals' ? (
+                  {service.id === 'sessions' ? (
                     <Link
-                      href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                      href="/book"
                       className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
                       Book Now
@@ -100,14 +99,14 @@ export default function Services() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Ready to experience authentic sauna?
+                Ready to experience our waterfront sauna?
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-                Contact us to discuss your sauna needs or book a session today.
+                Book a sauna session or contact us to learn about membership options at Atlas Waterfront Park.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
-                  href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                  href="/book"
                   className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Book Now

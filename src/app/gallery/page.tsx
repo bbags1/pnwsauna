@@ -11,8 +11,8 @@ export default function GalleryPage() {
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             Take a tour through our authentic Finnish sauna experiences, custom builds, and community events. 
-            Each image and video captures the essence of what makes PNW Sauna unique - from our mobile units 
-            to the serene environments we create for our clients.
+            Each image and video captures the essence of what makes PNW Sauna unique - from our waterfront 
+            facility to the serene environments we create for our clients.
           </p>
         </div>
         <Gallery />

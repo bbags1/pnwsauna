@@ -12,11 +12,17 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.10",
+    "date-fns": "^4.1.0",
     "framer-motion": "^10.16.4",
     "next": "14.0.4",
     "next-seo": "^6.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.57",

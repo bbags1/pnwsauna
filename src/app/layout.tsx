@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://pnwsauna.com'),
   title: {
-    default: "PNW Sauna | Mobile Sauna Rentals & Custom Builds in Coeur d'Alene",
+    default: "PNW Sauna | Sauna Sessions & Memberships at Atlas Waterfront Park, Coeur d'Alene",
     template: "%s | PNW Sauna",
   },
-  description: "Experience authentic Finnish sauna culture with PNW Sauna. We offer mobile sauna rentals, custom sauna building, consultation services, and host public sauna events in Coeur d'Alene, Idaho.",
-  keywords: ["sauna", "mobile sauna", "sauna rental", "custom sauna", "Finnish sauna", "Coeur d'Alene", "Idaho", "wellness", "sauna events"],
+  description: "Experience authentic Finnish sauna culture at PNW Sauna's Atlas Waterfront Park location in Coeur d'Alene, Idaho. We offer sauna sessions, community memberships, custom sauna building, and wellness events.",
+  keywords: ["sauna", "sauna sessions", "sauna membership", "custom sauna", "Finnish sauna", "Atlas Waterfront Park", "Coeur d'Alene", "Idaho", "wellness", "sauna community"],
   authors: [{ name: "PNW Sauna" }],
   creator: "PNW Sauna",
   publisher: "PNW Sauna",
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://pnwsauna.com/",
     siteName: "PNW Sauna",
-    title: "PNW Sauna | Mobile Sauna Rentals & Custom Builds in Coeur d'Alene",
-    description: "Experience authentic Finnish sauna culture with PNW Sauna. Mobile rentals, custom builds, and public events in Coeur d'Alene, Idaho.",
+    title: "PNW Sauna | Sauna Sessions & Memberships at Atlas Waterfront Park, Coeur d'Alene",
+    description: "Experience authentic Finnish sauna culture at Atlas Waterfront Park in Coeur d'Alene, Idaho. Sauna sessions, memberships, and custom builds.",
     images: [
       {
         url: "https://pnwsauna.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "PNW Sauna - Authentic Finnish Sauna Experience",
+        alt: "PNW Sauna - Authentic Finnish Sauna Experience at Atlas Waterfront Park",
       },
     ],
   },

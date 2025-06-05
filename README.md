@@ -1,6 +1,6 @@
 # PNW Sauna Website
 
-This is the official website for PNW Sauna, offering mobile sauna rentals, custom sauna building, and public sauna events in Coeur d'Alene, Idaho.
+This is the official website for PNW Sauna, offering sauna sessions, community memberships, and custom sauna building at our Atlas Waterfront Park location in Coeur d'Alene, Idaho.
 
 ## Technologies Used
 

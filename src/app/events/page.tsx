@@ -61,7 +61,7 @@ export default function Events() {
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">Book a Private Event</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Host a unique and memorable event with our mobile sauna. Perfect for:
+              Host a unique and memorable event at our beautiful Atlas Waterfront Park sauna location. Perfect for:
             </p>
             <ul className="mt-4 text-base leading-7 text-gray-600">
               <li className="flex items-center gap-x-3">
