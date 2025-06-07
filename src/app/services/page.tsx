@@ -65,7 +65,7 @@ export default function Services() {
                 <div className="mt-10">
                   {service.id === 'rentals' ? (
                     <Link
-                      href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                      href="https://wunderbook-production-mobilewebapp.azurewebsites.net/app/Discover?tenancyName=PNW_Sauna_LLC"
                       className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
                       Book Now
@@ -107,7 +107,7 @@ export default function Services() {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
-                  href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+                  href="https://wunderbook-production-mobilewebapp.azurewebsites.net/app/Discover?tenancyName=PNW_Sauna_LLC"
                   className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Book Now

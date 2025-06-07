@@ -140,7 +140,7 @@ export default function About() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="https://book.squareup.com/appointments/p66fi438yk183l/location/LDCZSAXXHTZER/services"
+              href="https://wunderbook-production-mobilewebapp.azurewebsites.net/app/Discover?tenancyName=PNW_Sauna_LLC"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Book a Session
