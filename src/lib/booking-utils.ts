@@ -3,8 +3,9 @@ import { createAdminSupabaseClient } from './supabase'
 
 // Pricing configuration
 export const PRICING = {
-  community: 25, // $25 per person for community sessions
-  private: 200,  // $200 for private sessions (up to 8 people)
+  community: 15, // $15 per person for community sessions
+  monthly_membership: 100, // $100 for monthly membership
+  // private: 200,  // Private sessions coming in the future
 } as const
 
 // Time slot configuration
@@ -240,7 +241,8 @@ export function calculateBookingPrice(
   partySize: number
 ): number {
   if (bookingType === 'private') {
-    return PRICING.private * 100 // Convert to cents
+    // Private sessions coming in the future
+    throw new Error('Private sessions not available yet')
   } else {
     return PRICING.community * partySize * 100 // Convert to cents
   }
@@ -260,12 +262,19 @@ export function hasActiveMembership(user: any): boolean {
     return false
   }
   
+  // Check if membership status is active
+  if (user.membership_status !== 'active') {
+    return false
+  }
+  
   if (user.membership_type === 'lifetime') {
     return true
   }
   
-  if (user.membership_expires_at) {
-    return isAfter(new Date(user.membership_expires_at), new Date())
+  // Check membership_end_date (new field) or fallback to membership_expires_at (old field)
+  const endDate = user.membership_end_date || user.membership_expires_at
+  if (endDate) {
+    return isAfter(new Date(endDate), new Date())
   }
   
   return false
@@ -276,12 +285,13 @@ export function getMemberPrice(
   bookingType: 'community' | 'private',
   partySize: number
 ): number {
-  // Members get 50% off community sessions, 25% off private sessions
+  // Members get 50% off community sessions
   const basePrice = calculateBookingPrice(bookingType, partySize)
   
   if (bookingType === 'community') {
     return Math.round(basePrice * 0.5)
   } else {
-    return Math.round(basePrice * 0.75)
+    // Private sessions not available yet
+    throw new Error('Private sessions not available yet')
   }
 } 

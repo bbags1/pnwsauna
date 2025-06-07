@@ -1,0 +1,26 @@
+# Environment Variables Template
+# Copy these to your .env.local file
+
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+# Stripe (get from https://dashboard.stripe.com/test/apikeys)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret
+
+# Stripe Product Price IDs (created by running: node scripts/setup-stripe-products.js)
+STRIPE_PRICE_COMMUNITY_SESSION=price_your_community_session_price_id
+STRIPE_PRICE_MONTHLY_MEMBERSHIP=price_your_monthly_membership_price_id
+
+# Future Features (will be added later)
+# STRIPE_PRICE_PRIVATE_SESSION=price_your_private_session_price_id
+# STRIPE_PRICE_FAMILY_MEMBERSHIP=price_your_family_membership_price_id
+
+# Email (Resend - get from https://resend.com/api-keys)
+RESEND_API_KEY=re_your_resend_api_key
+
+# App Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000 

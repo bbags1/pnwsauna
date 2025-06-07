@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
       userName,
       userPhone,
       notes,
+      paymentIntentId,
     } = body
     
     // Validate required fields
@@ -117,6 +118,7 @@ export async function POST(request: NextRequest) {
         party_size: partySize,
         status: 'pending',
         payment_status: 'pending',
+        payment_intent_id: paymentIntentId || null,
         total_amount: totalAmount,
         notes: notes,
       })
@@ -136,6 +138,51 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error creating booking:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+// New endpoint to get current availability for a specific slot
+export async function PATCH(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { timeSlotId } = body
+    
+    if (!timeSlotId) {
+      return NextResponse.json({ error: 'Time slot ID required' }, { status: 400 })
+    }
+    
+    const supabase = createServerSupabaseClient()
+    
+    // Get current availability
+    const { data: timeSlot, error } = await supabase
+      .from('time_slots')
+      .select('*, bookings!inner(party_size)')
+      .eq('id', timeSlotId)
+      .single()
+    
+    if (error || !timeSlot) {
+      return NextResponse.json({ error: 'Time slot not found' }, { status: 404 })
+    }
+    
+    // Calculate current bookings
+    const confirmedBookings = await supabase
+      .from('bookings')
+      .select('party_size')
+      .eq('time_slot_id', timeSlotId)
+      .eq('status', 'confirmed')
+    
+    const totalBooked = confirmedBookings.data?.reduce((sum, booking) => sum + booking.party_size, 0) || 0
+    const spotsAvailable = timeSlot.max_capacity - totalBooked
+    
+    return NextResponse.json({
+      spotsAvailable,
+      maxCapacity: timeSlot.max_capacity,
+      totalBooked,
+      isAvailable: spotsAvailable > 0
+    })
+  } catch (error) {
+    console.error('Error checking availability:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 } 

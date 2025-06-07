@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import StripeProvider from "@/components/StripeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,11 +70,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navigation />
-        <main className="min-h-screen">
-        {children}
-        </main>
-        <Footer />
+        <StripeProvider>
+          <Navigation />
+          <main className="min-h-screen">
+          {children}
+          </main>
+          <Footer />
+        </StripeProvider>
       </body>
     </html>
   );
