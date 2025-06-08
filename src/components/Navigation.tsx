@@ -52,7 +52,7 @@ export default function Navigation() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            href="https://wunderbook-production-mobilewebapp.azurewebsites.net/app/Discover?tenancyName=PNW_Sauna_LLC"
+            href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
             className="text-sm font-semibold leading-6 text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Book Now
@@ -97,7 +97,7 @@ export default function Navigation() {
               </div>
               <div className="py-6">
                 <Link
-                  href="https://wunderbook-production-mobilewebapp.azurewebsites.net/app/Discover?tenancyName=PNW_Sauna_LLC"
+                  href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white bg-blue-600 text-center hover:bg-blue-700"
                 >
                   Book Now
