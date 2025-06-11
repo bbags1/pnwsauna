@@ -2,42 +2,44 @@ import Link from 'next/link'
 
 const services = [
   {
-    id: 'rentals',
-    name: 'Mobile Sauna Rentals',
-    description: 'Bring the authentic Finnish sauna experience to your location.',
+    id: 'community',
+    name: 'Community Sauna Sessions',
+    description: 'Join our daily community sessions at Atlas Waterfront Park with direct Spokane River access.',
     features: [
-      'Authentic wood-fired or electric sauna options',
-      'Professional delivery and setup',
-      'Available for events, parties, or personal wellness retreats',
-      'Flexible rental periods',
-      'Complete instructions and safety guidelines provided',
-      'Optional add-ons like traditional vihta/vasta (birch branches)',
+      'Daily sessions 7-10 PM (expanding hours coming soon)',
+      'Authentic wood-fired Finnish sauna experience',
+      'Direct access to pristine Spokane River for cooling',
+      'Traditional hot-cold therapy for recovery and wellness',
+      'Community atmosphere with experienced sauna enthusiasts',
+      'All experience levels welcome with guidance provided',
     ],
+    price: '$15 per session'
   },
   {
-    id: 'building',
-    name: 'Custom Sauna Building',
-    description: 'Create your perfect sauna space with our expert building services.',
+    id: 'membership',
+    name: 'Monthly Unlimited Pass',
+    description: 'Unlimited access to all community sessions with our convenient monthly membership.',
     features: [
-      'Custom design consultation',
-      'Traditional and modern sauna styles',
-      'Indoor and outdoor installations',
-      'High-quality materials and craftsmanship',
-      'Expert installation',
-      'Warranty and maintenance support',
+      'Unlimited sessions throughout the month',
+      'Best value for regular sauna enthusiasts',
+      'Priority booking during peak times',
+      'Community member benefits and events',
+      'Flexible access to all daily sessions',
+      'Perfect for building a consistent wellness routine',
     ],
+    price: '$100 per month'
   },
   {
-    id: 'consultation',
-    name: 'Sauna Project Consultation',
-    description: 'Get expert guidance for your sauna project from start to finish.',
+    id: 'recovery',
+    name: 'River Recovery Experience',
+    description: 'The complete Finnish sauna experience with natural river cooling at our waterfront location.',
     features: [
-      'Site evaluation and recommendations',
-      'Design and layout planning',
-      'Material selection guidance',
-      'Technical specifications',
-      'Ventilation and safety planning',
-      'Budget optimization',
+      'Traditional hot-cold therapy protocol',
+      'Pristine Spokane River access year-round',
+      'Guided instruction for proper sauna techniques',
+      'Recovery and wellness benefits maximized',
+      'Beautiful waterfront setting for relaxation',
+      'Authentic Finnish cultural experience',
     ],
   },
 ]
@@ -49,10 +51,10 @@ export default function Services() {
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-600">Our Services</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Comprehensive Sauna Solutions
+            Atlas Waterfront Park Sauna Experience
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            From mobile rentals to custom builds, we provide everything you need to experience authentic Finnish sauna culture.
+            Experience authentic Finnish sauna culture at our permanent location with direct Spokane River access for traditional hot-cold therapy.
           </p>
         </div>
 
@@ -61,9 +63,12 @@ export default function Services() {
             <div key={service.id} id={service.id} className="flex flex-col gap-x-8 gap-y-10 border-t border-gray-900/10 pt-16 lg:flex-row">
               <div className="lg:w-1/2">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">{service.name}</h2>
+                {service.price && (
+                  <p className="mt-2 text-xl font-semibold text-blue-600">{service.price}</p>
+                )}
                 <p className="mt-6 text-base leading-7 text-gray-600">{service.description}</p>
                 <div className="mt-10">
-                  {service.id === 'rentals' ? (
+                  {(service.id === 'community' || service.id === 'membership') ? (
                     <Link
                       href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
                       className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -75,7 +80,7 @@ export default function Services() {
                       href="/contact"
                       className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
-                      Contact Us
+                      Learn More
                     </Link>
                   )}
                 </div>
@@ -100,20 +105,21 @@ export default function Services() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Ready to experience authentic sauna?
+                Ready to join our sauna community?
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-                Contact us to discuss your sauna needs or book a session today.
+                Experience authentic Finnish sauna culture with river recovery at Atlas Waterfront Park. 
+                Open daily 7-10 PM in beautiful Coeur d'Alene.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
                   href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
                   className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
-                  Book Now
+                  Book Session - $15
                 </Link>
                 <Link href="/contact" className="text-sm font-semibold leading-6 text-gray-900">
-                  Contact us <span aria-hidden="true">→</span>
+                  Visit our location <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>

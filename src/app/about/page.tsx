@@ -43,17 +43,16 @@ export default function About() {
               and connection with both nature and each other.
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Returning to the Pacific Northwest, we saw the perfect environment to nurture this tradition. 
-              The region's natural beauty, outdoor lifestyle, and community-minded spirit aligned perfectly 
-              with the essence of Nordic sauna culture. We founded PNW Sauna with a vision to create 
-              authentic sauna experiences that bring people together and promote wellness in our corner 
-              of the world.
+              Returning to the Pacific Northwest, we found the perfect location at Atlas Waterfront Park 
+              in Coeur d'Alene. With direct access to the pristine Spokane River and surrounded by Idaho's 
+              natural beauty, we established our permanent sauna community where traditional Finnish 
+              hot-cold therapy comes alive.
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Based in Coeur d'Alene, Idaho, we're dedicated to sharing the transformative power of 
-              traditional sauna practices. Whether it's through our mobile sauna rentals, custom builds, 
-              or community events, our mission is to foster connections and well-being, one sauna 
-              session at a time.
+              Our daily community sessions from 7-10 PM create a welcoming space for recovery, wellness, 
+              and connection. Whether you're seeking post-workout recovery, stress relief, or simply the 
+              joy of authentic sauna culture with river cooling, our Atlas Waterfront location offers 
+              the complete Finnish experience in Idaho's most beautiful setting.
             </p>
           </div>
           <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
@@ -133,20 +132,20 @@ export default function About() {
         </div>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Experience the Magic of Sauna
+            Experience Sauna & River Recovery
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-            Join us in building a vibrant sauna community in the Pacific Northwest.
+            Join our vibrant community at Atlas Waterfront Park. Daily sessions 7-10 PM with direct Spokane River access.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
               className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Book a Session
+              Book Session - $15
             </Link>
             <Link href="/contact" className="text-sm font-semibold leading-6 text-white">
-              Contact us <span aria-hidden="true">→</span>
+              Visit our location <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

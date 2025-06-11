@@ -57,10 +57,10 @@ export default function Contact() {
                 <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-blue-100 to-blue-800 opacity-20" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Get in Touch</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Visit Our Sauna</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Have questions about our services? Want to book a sauna session or discuss a custom build? 
-              We're here to help you experience authentic Finnish sauna culture.
+              Join us at our permanent location at Atlas Waterfront Park for daily community sauna sessions. 
+              Experience authentic Finnish sauna culture with direct Spokane River access for traditional hot-cold therapy.
             </p>
             <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
               <div className="flex gap-x-4">
@@ -70,7 +70,16 @@ export default function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                   </svg>
                 </dt>
-                <dd>Coeur d'Alene, Idaho</dd>
+                <dd>Atlas Waterfront Park<br />2411 N Atlas Rd, Coeur d'Alene, ID 83814</dd>
+              </div>
+              <div className="flex gap-x-4">
+                <dt className="flex-none">
+                  <span className="sr-only">Hours</span>
+                  <svg className="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </dt>
+                <dd>Daily 7-10 PM<br /><span className="text-sm text-gray-500">Expanding hours coming soon</span></dd>
               </div>
               <div className="flex gap-x-4">
                 <dt className="flex">
@@ -92,7 +101,7 @@ export default function Contact() {
                 href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
                 className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
-                Book Now
+                Book Session - $15
               </Link>
             </div>
           </div>
