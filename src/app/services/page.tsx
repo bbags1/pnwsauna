@@ -11,7 +11,6 @@ const services = [
       'Direct access to pristine Spokane River for cooling',
       'Traditional hot-cold therapy for recovery and wellness',
       'Community atmosphere with experienced sauna enthusiasts',
-      'All experience levels welcome with guidance provided',
     ],
     price: '$15 per session'
   },
@@ -22,12 +21,10 @@ const services = [
     features: [
       'Unlimited sessions throughout the month',
       'Best value for regular sauna enthusiasts',
-      'Priority booking during peak times',
-      'Community member benefits and events',
       'Flexible access to all daily sessions',
       'Perfect for building a consistent wellness routine',
     ],
-    price: '$100 per month'
+    price: '$60 per month'
   },
   {
     id: 'recovery',
@@ -36,12 +33,10 @@ const services = [
     features: [
       'Traditional hot-cold therapy protocol',
       'Pristine Spokane River access year-round',
-      'Guided instruction for proper sauna techniques',
-      'Recovery and wellness benefits maximized',
       'Beautiful waterfront setting for relaxation',
       'Authentic Finnish cultural experience',
     ],
-  },
+  }
 ]
 
 export default function Services() {
