@@ -1,3 +1,5 @@
+'use client';
+
 import { loadStripe } from '@stripe/stripe-js';
 
 const PRICE_IDS = {
@@ -13,6 +15,20 @@ const getStripe = () => {
   }
   return stripePromise;
 };
+
+interface BookingButtonProps {
+  onClick: () => Promise<void>;
+  children: React.ReactNode;
+}
+
+const BookingButton: React.FC<BookingButtonProps> = ({ onClick, children }) => (
+  <button
+    onClick={onClick}
+    className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200"
+  >
+    {children}
+  </button>
+);
 
 export default function BookingPage() {
   const handlePayment = async (priceId: string, mode: 'payment' | 'subscription') => {
@@ -75,12 +91,9 @@ export default function BookingPage() {
                   Full amenities access
                 </li>
               </ul>
-              <button
-                onClick={() => handlePayment(PRICE_IDS.SINGLE_SESSION, 'payment')}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-              >
+              <BookingButton onClick={() => handlePayment(PRICE_IDS.SINGLE_SESSION, 'payment')}>
                 Book Single Session
-              </button>
+              </BookingButton>
             </div>
           </div>
 
@@ -109,12 +122,9 @@ export default function BookingPage() {
                   Member exclusive events
                 </li>
               </ul>
-              <button
-                onClick={() => handlePayment(PRICE_IDS.MEMBERSHIP, 'subscription')}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-              >
+              <BookingButton onClick={() => handlePayment(PRICE_IDS.MEMBERSHIP, 'subscription')}>
                 Start Membership
-              </button>
+              </BookingButton>
             </div>
           </div>
 
@@ -144,12 +154,9 @@ export default function BookingPage() {
                   Full amenities access
                 </li>
               </ul>
-              <button
-                onClick={() => handlePayment(PRICE_IDS.FAMILY_PASS, 'payment')}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200"
-              >
+              <BookingButton onClick={() => handlePayment(PRICE_IDS.FAMILY_PASS, 'payment')}>
                 Book Family Pass
-              </button>
+              </BookingButton>
             </div>
           </div>
         </div>
