@@ -23,6 +23,7 @@ const services = [
       'Best value for regular sauna enthusiasts',
       'Flexible access to all daily sessions',
       'Perfect for building a consistent wellness routine',
+      'Bring a friend for free for their first session',
     ],
     price: '$60 per month'
   },
@@ -65,7 +66,7 @@ export default function Services() {
                 <div className="mt-10">
                   {(service.id === 'community' || service.id === 'membership') ? (
                     <Link
-                      href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
+                      href="/book"
                       className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
                       Book Now
@@ -108,7 +109,7 @@ export default function Services() {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
-                  href="https://flutterwbdev.azurewebsites.net/#/tenantDetails?tenantName=PNW_Sauna_LLC"
+                  href="/book"
                   className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                   Book Session - $15
