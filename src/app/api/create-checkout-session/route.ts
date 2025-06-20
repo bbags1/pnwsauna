@@ -3,6 +3,17 @@ import Stripe from 'stripe';
 
 export const runtime = 'edge';
 
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
+
 export async function POST(req: Request) {
   try {
     const { priceId, mode } = await req.json();
@@ -32,12 +43,24 @@ export async function POST(req: Request) {
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
     });
 
-    return NextResponse.json({ sessionId: session.id });
+    return NextResponse.json(
+      { sessionId: session.id },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    );
   } catch (error) {
     console.error('Error creating checkout session:', error);
     return NextResponse.json(
       { error: 'Error creating checkout session' },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
     );
   }
 } 
