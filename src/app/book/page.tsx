@@ -33,10 +33,13 @@ const BookingButton: React.FC<BookingButtonProps> = ({ onClick, children }) => (
 export default function BookingPage() {
   const handlePayment = async (priceId: string, mode: 'payment' | 'subscription') => {
     try {
+      console.log('Starting payment process...', { priceId, mode });
+      
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           priceId,
@@ -44,26 +47,38 @@ export default function BookingPage() {
         }),
       });
 
+      console.log('API Response status:', response.status);
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('API Error Response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
 
-      const { sessionId, error } = await response.json();
-      if (error) throw new Error(error);
+      const data = await response.json();
+      console.log('API Response data:', data);
+
+      if (!data.sessionId) {
+        throw new Error('No session ID returned from the API');
+      }
 
       const stripe = await getStripe();
-      if (!stripe) throw new Error('Stripe failed to initialize');
+      if (!stripe) {
+        throw new Error('Failed to initialize Stripe');
+      }
 
+      console.log('Redirecting to Stripe checkout...');
       const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId,
+        sessionId: data.sessionId,
       });
 
       if (stripeError) {
+        console.error('Stripe Error:', stripeError);
         throw new Error(stripeError.message);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again.');
+      console.error('Payment Error:', error);
+      alert('Something went wrong with the payment process. Please try again or contact support if the issue persists.');
     }
   };
 
@@ -80,7 +95,7 @@ export default function BookingPage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="px-6 py-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Single Session</h3>
-              <div className="text-2xl font-bold text-blue-600 mb-4">$100\</div>
+              <div className="text-2xl font-bold text-blue-600 mb-4">$15/session</div>
               <p className="text-gray-700 mb-6">Perfect for first-time visitors or occasional use</p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center text-gray-700">
