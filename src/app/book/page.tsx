@@ -44,7 +44,12 @@ export default function BookingPage() {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const { sessionId, error } = await response.json();
+      if (error) throw new Error(error);
 
       const stripe = await getStripe();
       if (!stripe) throw new Error('Stripe failed to initialize');
@@ -75,6 +80,7 @@ export default function BookingPage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="px-6 py-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Single Session</h3>
+              <div className="text-2xl font-bold text-blue-600 mb-4">$100\</div>
               <p className="text-gray-700 mb-6">Perfect for first-time visitors or occasional use</p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center text-gray-700">
@@ -94,6 +100,7 @@ export default function BookingPage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-blue-500">
             <div className="px-6 py-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Monthly Membership</h3>
+              <div className="text-2xl font-bold text-blue-600 mb-4">$60/month</div>
               <p className="text-gray-700 mb-6">Best value for regular sauna enthusiasts</p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center text-gray-700">
@@ -119,7 +126,7 @@ export default function BookingPage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="px-6 py-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Family Pass</h3>
-              <div className="text-2xl font-bold text-blue-600 mb-4">$100</div>
+              <div className="text-2xl font-bold text-blue-600 mb-4">$100/month</div>
               <p className="text-gray-700 mb-6">Perfect for families and small groups</p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center text-gray-700">
